@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <style>
+      
+      body{
+  --backgroundcolor:#595BD9;
+  --fontcolor:white;
+  --accents:#2E30D9;
+}
+
+textarea{
+  width:90vw;
+  height:80vh;
+  resize:vertical;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  flex-direction:column;
+}
+
+body{
+      height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  flex-direction:column;
+}
+
+      
+    </style>
+  </head>
+  <body>
+    
+    <input type="date" id="date"></input>
+
+<textarea id="textarea"></textarea>
+  <button id="catchbutton" onclick="catchdream()"> Catch dream </button>
+    
+    <script>
+//copied from SO - timezone support?
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+
+document.getElementById('date').value = new Date().toDateInputValue();
+//end of copying
+      
+function catchdream(){
+  var dream = document.getElementById("textarea").value
+  var dreamdate = document.getElementById("date").value.toString()
+  alert(dreamdate);
+  if (dream){
+    localStorage.setItem(dreamdate,dream)
+  }
+  if(localStorage.getItem("2017-07-28")){
+    alert(localStorage.getItem("2017-07-28"));
+  }
+}
+    </script>
+  </body>
+</html>
