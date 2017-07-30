@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <style>
+    </style>
+  </head>
+  <body>
+    
+<input type="date" id="searchdate"></input>
+<button id="search" onclick="lookfordream()">Search</button>
+<p id="dream"></p>    
+    
+    <script>
+      function lookfordream(){
+  var dreamdate=document.getElementById("searchdate").value.toString();
+   if(localStorage.getItem(dreamdate)){
+    document.getElementById("dream").innerHTML=localStorage.getItem(dreamdate);
+  }
+}
+    </script>
+  </body>
+</html>
