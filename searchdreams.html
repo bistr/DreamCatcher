@@ -1,13 +1,49 @@
 <html>
   <head>
     <style>
+      
+      input {
+  width: 70vw;
+  font-size: 2em;
+  background-color: white;
+  margin: 5px;
+}
+
+body {
+  --backgroundcolor: #8070E6;
+  --fontcolor: white;
+  --accents: #3EB8FA;
+  background-color: var(--backgroundcolor);
+  font-family: Arial;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+button{
+  font-size:2em;
+  color:white;
+  background-color:var(--accents);
+}
+
+#dream{
+  width:85vw;
+  background-color:var(--accents);
+    color:white;
+  margin-top:20px;
+  padding:10px;
+  word-wrap:break-word;
+}
+      
     </style>
   </head>
   <body>
     
 <input type="date" id="searchdate"></input>
 <button id="search" onclick="lookfordream()">Search</button>
-<p id="dream"></p>    
+<div id="dream"></div>    
     
     <script>
       function lookfordream(){
