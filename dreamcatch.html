@@ -2,31 +2,40 @@
   <head>
     <style>
       
-      body{
-  --backgroundcolor:#595BD9;
-  --fontcolor:white;
-  --accents:#2E30D9;
+     body {
+  --backgroundcolor: #8070E6;
+  --fontcolor: white;
+  --accents: #3EB8FA;
+  background-color: var(--backgroundcolor);
+  font-family:Arial;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-textarea{
-  width:90vw;
-  height:80vh;
-  resize:vertical;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  flex-direction:column;
+textarea {
+  width: 90vw;
+  height: 80vh;
+  resize: vertical;
 }
 
-body{
-      height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  flex-direction:column;
+button {
+  width: 92vw;
+  margin-top: 10px;
+font-size:2em;
+  padding: 10px;
+  background-color:var(--accents);
+    color:white;
 }
 
-      
+input{
+  font-size:2em;
+   background-color:var(--accents);
+    color:white;
+  margin:5px;
+}
     </style>
   </head>
   <body>
@@ -45,19 +54,16 @@ Date.prototype.toDateInputValue = (function() {
 });
 
 document.getElementById('date').value = new Date().toDateInputValue();
-//end of copying
-      
+
 function catchdream(){
   var dream = document.getElementById("textarea").value
   var dreamdate = document.getElementById("date").value.toString()
-  alert(dreamdate);
   if (dream){
     localStorage.setItem(dreamdate,dream)
   }
-  if(localStorage.getItem("2017-07-28")){
-    alert(localStorage.getItem("2017-07-28"));
-  }
+  
 }
+
     </script>
   </body>
 </html>
