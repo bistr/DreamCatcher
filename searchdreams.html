@@ -35,6 +35,7 @@ button{
   margin-top:20px;
   padding:10px;
   word-wrap:break-word;
+  visibility:hidden;
 }
       
     </style>
@@ -47,8 +48,10 @@ button{
     
     <script>
       function lookfordream(){
+        
   var dreamdate=document.getElementById("searchdate").value.toString();
    if(localStorage.getItem(dreamdate)){
+     document.getElementById("dream").visibility="visible";
     document.getElementById("dream").innerHTML=localStorage.getItem(dreamdate);
   }
 }
