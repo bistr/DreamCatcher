@@ -1,31 +1,30 @@
 <html>
   <head>
     <style>
-      
-      input {
+    input {
   width: 70vw;
   font-size: 2em;
   background-color: white;
   margin: 5px;
+
 }
 
 body {
-  --backgroundcolor: #8070E6;
-  --fontcolor: white;
-  --accents: #3EB8FA;
   background-color: #8070E6;
   font-family: Arial;
-  height: 100%;
+ height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction:column;
 }
 
 button{
   font-size:2em;
   color:white;
   background-color:#3EB8FA;
+  margin:5px;
+  border-radius:3px;
 }
 
 #dream{
@@ -35,9 +34,25 @@ button{
   margin-top:20px;
   padding:10px;
   word-wrap:break-word;
-  visibility:hidden;
+  visibility:hidden; 
+  font-size:2em;
+  border-radius:5px;:
 }
-      
+
+.datichka{
+  float:right;
+  display:block;
+  background-color:rgba(0,0,0,0.5);
+  padding:10px;
+  border-radius:5px 5px 0px 0px;
+  width:100%;
+  text-align:right;
+  margin-right:-10px;
+  margin-top:-10px;
+  margin-bottom:20px;
+  
+  
+}
     </style>
   </head>
   <body>
@@ -52,7 +67,7 @@ button{
   var dreamdate=document.getElementById("searchdate").value.toString();
    if(localStorage.getItem(dreamdate)){
      document.getElementById("dream").style.visibility="visible";
-    document.getElementById("dream").innerHTML=localStorage.getItem(dreamdate);
+    document.getElementById("dream").innerHTML="<span class='datichka'>"+dreamdate[8]+dreamdate[9]+"."+dreamdate[5]+dreamdate[6]+"."+dreamdate[0]+dreamdate[1] +dreamdate[2]+dreamdate[3]+ "</span><br> " +localStorage.getItem(dreamdate);
   }
 }
     </script>
