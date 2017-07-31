@@ -1,7 +1,7 @@
 <html>
   <head>
     <style>
-    input {
+     input {
   width: 70vw;
   font-size: 2em;
   background-color: white;
@@ -35,7 +35,7 @@ button{
   padding:10px;
   word-wrap:break-word;
   visibility:hidden; 
-  font-size:1.5em;
+  font-size:2em;
   border-radius:5px;:
 }
 
@@ -53,23 +53,96 @@ button{
   
   
 }
+
+li{
+  list-style-type:none;
+  width:85vw;
+  background-color:#3EB8FA;
+  color:white;
+  margin-top:20px;
+  padding:10px;
+  word-wrap:break-word;
+  font-size:1em;
+  border-radius:5px;:
+}
+
+ul{
+  margin-left:-35px;
+}
     </style>
   </head>
   <body>
     
-<input type="date" id="searchdate"></input>
-<button id="search" onclick="lookfordream()">Search</button>
-<div id="dream"></div>    
+
+  <input type="date" id="searchdate"></input>
+  <div>
+    <button id="search" onclick="lookfordream()">Search</button>
+    <button id="magic" onclick="magic()">View All</button>
+  </div>
+  <div id="dream"></div>
+  <ul id="dreamlist"></ul>  
     
     <script>
-      function lookfordream(){
-        
-  var dreamdate=document.getElementById("searchdate").value.toString();
-   if(localStorage.getItem(dreamdate)){
-     document.getElementById("dream").style.visibility="visible";
-    document.getElementById("dream").innerHTML="<span class='datichka'>"+dreamdate[8]+dreamdate[9]+"."+dreamdate[5]+dreamdate[6]+"."+dreamdate[0]+dreamdate[1] +dreamdate[2]+dreamdate[3]+ "</span><br> " +localStorage.getItem(dreamdate);
+function lookfordream() {
+  var dreamdate = document.getElementById("searchdate").value.toString();
+  if (localStorage.getItem(dreamdate)) {
+    document.getElementById("dreamlist").style.display = "none";
+    document.getElementById("dream").style.display = "block";
+
+    document.getElementById("dream").style.visibility = "visible";
+    document.getElementById("dream").innerHTML =
+      "<span class='datichka'>" +
+      dreamdate[8] +
+      dreamdate[9] +
+      "." +
+      dreamdate[5] +
+      dreamdate[6] +
+      "." +
+      dreamdate[0] +
+      dreamdate[1] +
+      dreamdate[2] +
+      dreamdate[3] +
+      "</span><br> " +
+      localStorage.getItem(dreamdate);
   }
 }
+
+function magic() {
+  document.getElementById("dreamlist").style.display = "block";
+  document.getElementById("dreamlist").innerHTML = "";
+  document.getElementById("dream").style.display = "none";
+
+  var dreamdate = "";
+  var dreamcontent = "";
+  var dreamlist = document.getElementById("dreamlist");
+  for (var i = 0, len = localStorage.length; i < len; ++i) {
+    dreamcontent = localStorage.getItem(localStorage.key(i));
+    dreamdate = localStorage.key(i);
+    if (
+      dreamdate.length == 10 &&
+      dreamdate[4] == dreamdate[7] &&
+      dreamdate[7] == "-"
+    ) {
+      var box = document.createElement("li");
+      box.innerHTML =
+        "<span class='datichka'>" +
+        dreamdate[8] +
+        dreamdate[9] +
+        "." +
+        dreamdate[5] +
+        dreamdate[6] +
+        "." +
+        dreamdate[0] +
+        dreamdate[1] +
+        dreamdate[2] +
+        dreamdate[3] +
+        "</span><br> " +
+        dreamcontent;
+      dreamlist.insertBefore(box, dreamlist.childNodes[0]);
+    }
+  }
+}
+
     </script>
   </body>
 </html>
