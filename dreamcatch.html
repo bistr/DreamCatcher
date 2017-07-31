@@ -67,7 +67,8 @@ function catchdream(){
   var dream = document.getElementById("textarea").value
   var dreamdate = document.getElementById("date").value.toString()
   if (dream){
-    localStorage.setItem(dreamdate,dream)
+    localStorage.setItem(dreamdate,dream);
+    window.open("index.html",_self);
   }
   
 }
