@@ -51,7 +51,7 @@ button{
         
   var dreamdate=document.getElementById("searchdate").value.toString();
    if(localStorage.getItem(dreamdate)){
-     document.getElementById("dream").visibility="visible";
+     document.getElementById("dream").style.visibility="visible";
     document.getElementById("dream").innerHTML=localStorage.getItem(dreamdate);
   }
 }
