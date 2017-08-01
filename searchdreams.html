@@ -1,7 +1,7 @@
 <html>
   <head>
     <style>
-     input {
+ input {
   width: 70vw;
   font-size: 2em;
   background-color: white;
@@ -12,6 +12,7 @@
 body {
   background-color: #8070E6;
   font-family: Arial;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,15 +28,7 @@ button{
 }
 
 #dream{
-  width:85vw;
-  background-color:#3EB8FA;
-    color:white;
-  margin-top:20px;
-  padding:10px;
-  word-wrap:break-word;
   visibility:hidden; 
-  font-size:2em;
-  border-radius:5px;:
 }
 
 .datichka{
@@ -71,25 +64,31 @@ ul{
     </style>
   </head>
   <body>
-    
+
 
   <input type="date" id="searchdate"></input>
   <div>
     <button id="search" onclick="lookfordream()">Search</button>
     <button id="magic" onclick="magic()">View All</button>
   </div>
-  <div id="dream"></div>
-  <ul id="dreamlist"></ul>  
+  <ul id="dream"></ul>
+  <ul id="dreamlist"></ul>
+
     
     <script>
 function lookfordream() {
+  document.getElementById('dream').innerHTML="";
   var dreamdate = document.getElementById("searchdate").value.toString();
   if (localStorage.getItem(dreamdate)) {
     document.getElementById("dreamlist").style.display = "none";
     document.getElementById("dream").style.display = "block";
 
     document.getElementById("dream").style.visibility = "visible";
-    document.getElementById("dream").innerHTML =
+    
+    for (var suncho=0;suncho<JSON.parse(localStorage.getItem(dreamdate)).length;suncho++){
+    var golemo=document.getElementById("dream");
+    var malko = document.createElement("li");
+    malko.innerHTML =
       "<span class='datichka'>" +
       dreamdate[8] +
       dreamdate[9] +
@@ -102,45 +101,32 @@ function lookfordream() {
       dreamdate[2] +
       dreamdate[3] +
       "</span><br> " +
-      localStorage.getItem(dreamdate);
+      JSON.parse(localStorage.getItem(dreamdate))[suncho];
+      golemo.insertBefore(malko,golemo.childNodes[0]);
   }
 }
-
+}
 function magic() {
   document.getElementById("dreamlist").style.display = "block";
   document.getElementById("dreamlist").innerHTML = "";
   document.getElementById("dream").style.display = "none";
 
-  var dreamdate = "";
-  var dreamcontent = "";
-  var dreamlist = document.getElementById("dreamlist");
-  for (var i = 0, len = localStorage.length; i < len; ++i) {
-    dreamcontent = localStorage.getItem(localStorage.key(i));
-    dreamdate = localStorage.key(i);
-    if (
-      dreamdate.length == 10 &&
-      dreamdate[4] == dreamdate[7] &&
-      dreamdate[7] == "-"
-    ) {
-      var box = document.createElement("li");
-      box.innerHTML =
-        "<span class='datichka'>" +
-        dreamdate[8] +
-        dreamdate[9] +
-        "." +
-        dreamdate[5] +
-        dreamdate[6] +
-        "." +
-        dreamdate[0] +
-        dreamdate[1] +
-        dreamdate[2] +
-        dreamdate[3] +
-        "</span><br> " +
-        dreamcontent;
-      dreamlist.insertBefore(box, dreamlist.childNodes[0]);
-    }
-  }
-}
+    var dreamdate="";
+  var dreamcontent="";
+  var dreamlist=document.getElementById("dreamlist");
+  for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+    dreamdate=localStorage.key( i ) ;
+    for (var dreamid=0; dreamid<JSON.parse(localStorage.getItem(dreamdate)).length;dreamid++){
+    
+    dreamcontent=JSON.parse(localStorage.getItem(dreamdate))[dreamid] ;
+    
+if (dreamdate.length==10 && dreamdate[4]==dreamdate[7] && dreamdate[7]=="-"){
+
+
+    var box=document.createElement("li");
+    box.innerHTML="<span class='datichka'>"+dreamdate[8]+dreamdate[9]+"."+dreamdate[5]+dreamdate[6]+"."+dreamdate[0]+dreamdate[1] +dreamdate[2]+dreamdate[3]+ "</span><br> " +dreamcontent;
+    dreamlist.insertBefore(box, dreamlist.childNodes[0]);
+  }}} }
 
     </script>
   </body>
