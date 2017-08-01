@@ -67,10 +67,23 @@ function catchdream(){
   var dream = document.getElementById("textarea").value
   var dreamdate = document.getElementById("date").value.toString()
   if (dream){
-    localStorage.setItem(dreamdate,dream);
-    window.location="index.html";
-  }
-  
+    if (localStorage.getItem(dreamdate)){
+      var dreamarr=JSON.parse(localStorage.getItem(dreamdate).slice());
+      dreamarr.push(dream);
+      localStorage.setItem(dreamdate,JSON.stringify(dreamarr));
+    }
+    else{
+      var dreamarr=[]
+      dreamarr.push(dream);
+      
+    localStorage.setItem(dreamdate,JSON.stringify(dreamarr));
+    
+    }
+    document.getElementById("textarea").value="";
+    setTimeout(function(){
+  window.location="index.html";
+    },800);
+}
 }
 
     </script>
