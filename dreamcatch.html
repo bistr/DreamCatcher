@@ -12,7 +12,7 @@
   --backgroundcolor: #8070E6;
   --fontcolor: white;
   --accents: #3EB8FA;
-  background-color: #8070E6;
+  background-color: #175489;
   font-family:Arial;
   height: 100%;
   display: flex;
@@ -23,9 +23,10 @@
 
 textarea {
   width: 90vw;
-  height: 70vh;
+  height: 67vh;
   resize: vertical;
-  font-size:1.5em
+  font-size:1.5em;
+  border:none;
 }
 
 button {
@@ -33,13 +34,14 @@ button {
   margin-top: 10px;
 font-size:2em;
   padding: 10px 0px;
-  background-color:#3EB8FA;
+  background-color:#4E96D4;
     color:white;
+  border:none;
 }
 
 input{
   font-size:2em;
-   background-color:#3EB8FA;
+   background-color:#4E96D4;
     color:white;
   margin:10px;
   width:91vw;
@@ -50,7 +52,7 @@ input{
     
     <input type="date" id="date"></input>
 
-<textarea id="textarea"></textarea>
+<textarea id="textarea" placeholder="I dreamt that..."></textarea>
   <button id="catchbutton" onclick="catchdream()"> Catch dream </button>
     
     <script>
