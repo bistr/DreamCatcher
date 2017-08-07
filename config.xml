@@ -5,6 +5,12 @@
         versionCode = "1" 
         version     = "1.0.0" >
  
+        
+<preference name="permissions" value="none" />
+        <preference name="fullscreen" value="true" />
+        <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+          <gap:plugin name="org.apache.cordova.splashscreen" />
     <!-- versionCode is Android only -->
     <!-- version is in major.minor.patch format --> 
     <name>DreamCatch</name>
