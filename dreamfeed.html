@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <style>
+      
+@font-face {
+    font-family: fontche;
+    src: url(opensans.ttf);
+}
+      
+
+body {
+  background-color: #175489;
+  font-family: fontche;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+}
+
+
+.datichka{
+  float:right;
+  display:block;
+  background-color:rgba(0,0,0,0.5);
+  padding:10px;
+  border-radius:5px 5px 0px 0px;
+  width:100%;
+  text-align:right;
+  margin-right:-10px;
+  margin-top:-10px;
+  margin-bottom:20px;
+    
+  
+}
+li{
+  list-style-type:none;
+  width:85vw;
+  background-color:#4E96D4;
+  color:white;
+  margin-top:20px;
+  padding:10px;
+  word-wrap:break-word;
+  font-size:1em;
+  border-radius:5px;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.5);
+}
+ul{
+  margin-left:-35px;
+}
+    </style>
+  </head>
+  <body>
+
+  <ul id="dreamlist"></ul>
+
+    
+    <script>
+
+
+  document.getElementById("dreamlist").style.display = "block";
+  document.getElementById("dreamlist").innerHTML = "";
+  document.getElementById("dream").style.display = "none";
+    var dreamdate="";
+  var dreamcontent="";
+  var dreamlist=document.getElementById("dreamlist");
+  for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+    dreamdate=localStorage.key( i ) ;
+    for (var dreamid=0; dreamid<JSON.parse(localStorage.getItem(dreamdate)).length;dreamid++){
+    
+    dreamcontent=JSON.parse(localStorage.getItem(dreamdate))[dreamid] ;
+    
+if (dreamdate.length==10 && dreamdate[4]==dreamdate[7] && dreamdate[7]=="-"){
+    var box=document.createElement("li");
+    box.innerHTML="<span class='datichka'>"+dreamdate[8]+dreamdate[9]+"."+dreamdate[5]+dreamdate[6]+"."+dreamdate[0]+dreamdate[1] +dreamdate[2]+dreamdate[3]+ "</span><br> " +dreamcontent;
+    dreamlist.insertBefore(box, dreamlist.childNodes[0]);
+  }}} 
+    </script>
+  </body>
+</html>
