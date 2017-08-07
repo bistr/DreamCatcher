@@ -90,7 +90,6 @@ function lookfordream() {
   document.getElementById('dream').innerHTML="";
   var dreamdate = document.getElementById("searchdate").value.toString();
   if (localStorage.getItem(dreamdate)) {
-    document.getElementById("dreamlist").style.display = "none";
     document.getElementById("dream").style.display = "block";
 
     document.getElementById("dream").style.visibility = "visible";
