@@ -9,7 +9,8 @@
 <preference name="permissions" value="none" />
 
     <preference name="SplashScreen" value="splash" /> 
-        <preference name="SplashScreenDelay" value="4000" />  
+        <preference name="SplashScreenDelay" value="3000" />
+        <preference name="FadeSplashScreenDuration" value="10" />
     
 
     
