@@ -62,7 +62,7 @@ ul{
     var dreamdate="";
   var dreamcontent="";
   var dreamlist=document.getElementById("dreamlist");
-      var hidemode=1;
+      var hidemode=localStorage.getItem("hidemode");
   for ( var i = 0, len = localStorage.length; i < len; ++i ) {
     dreamdate=localStorage.key( i ) ;
     for (var dreamid=0; dreamid<JSON.parse(localStorage.getItem(dreamdate)).length;dreamid++){
@@ -71,7 +71,7 @@ ul{
     
 if (dreamdate.length==10 && dreamdate[4]==dreamdate[7] && dreamdate[7]=="-"){
   //big edit 
-      if (hidemode==1){
+      if (hidemode=="true"){
           var tekst=dreamcontent.split(" ");
     for (var word=0; word<tekst.length;word++){
       var duma=tekst[word];
