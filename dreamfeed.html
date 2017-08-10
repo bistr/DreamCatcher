@@ -62,7 +62,7 @@ ul{
     var dreamdate="";
   var dreamcontent="";
   var dreamlist=document.getElementById("dreamlist");
-      var hidemode=1;
+      var hidemode=0;
   for ( var i = 0, len = localStorage.length; i < len; ++i ) {
     dreamdate=localStorage.key( i ) ;
     for (var dreamid=0; dreamid<JSON.parse(localStorage.getItem(dreamdate)).length;dreamid++){
