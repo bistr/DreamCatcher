@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <style>
+      
+          @font-face {
+    font-family: fontche;
+    src: url(opensans.ttf);
+}
+      
+   body {
+     overflow:hidden;
+     position:relative;
+  background-color: #175489;
+  font-family:fontche;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+     font-family: fontche;
+}
+textarea {
+  width: 90vw;
+  height: 67vh;
+  resize: vertical;
+  font-size:3em;
+  border:none;
+  font-family: fontche;
+  
+  
+}
+button {
+  width: 92vw;
+  margin-top: 10px;
+font-size:2em;
+  padding: 10px 0px;
+  background-color:#4E96D4;
+    color:white;
+  border:none;
+  font-family: fontche;
+  border-radius:5px;
+  text-shadow:0px 0px 3px rgba(255,255,255,0.5);
+}
+
+p{
+  color:white;
+  font-size:2em;
+}
+
+
+    </style>
+  </head>
+  <body>
+    
+   <p id="instruction"> Separate names with a comma.</p>
+<textarea id="nameslist"></textarea>
+<button id="btn" onclick="done()">DONE</button>
+    
+    <script>
+var namesarr=JSON.parse(localStorage.getItem("namesofpeople"));
+var notnamesarr=JSON.parse(localStorage.getItem("notnames"));
+
+document.getElementById("nameslist").value=namesarr;
+
+
+
+function done(){
+  
+  var newarr=document.getElementById("nameslist").value.split(",");
+  
+  localStorage.setItem("namesofpeople",JSON.stringify(newarr)); //sanitize this - has a lot of opportunity for bugs
+ 
+  for (var name in newarr){
+    if (notnamesarr.indexOf(newarr[name])!=-1){
+     
+      notnamesarr.splice(notnamesarr.indexOf(newarr[name]),1);
+      }
+     
+    }
+   localStorage.setItem("notnames",JSON.stringify(notnamesarr));
+
+   
+    
+    document.getElementById("nameslist").value="";
+    setTimeout(function(){
+  window.location="index.html";
+    },800);
+}
+
+    </script>
+  </body>
+</html>
