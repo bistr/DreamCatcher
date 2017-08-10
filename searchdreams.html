@@ -99,11 +99,11 @@ function lookfordream() {
     for (var suncho=0;suncho<JSON.parse(localStorage.getItem(dreamdate)).length;suncho++){
     var golemo=document.getElementById("dream");
     var malko = document.createElement("li");
-      var hidemode=1;
+      var hidemode=localStorage.getItem("hidemode");
       var dreamcontent =JSON.parse(localStorage.getItem(dreamdate))[suncho];
       //big edit
 
-    if (hidemode==1){
+    if (hidemode=="true"){
           var tekst=dreamcontent.split(" ");
     for (var word=0; word<tekst.length;word++){
       var duma=tekst[word];
