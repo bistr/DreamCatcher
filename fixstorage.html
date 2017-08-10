@@ -1,0 +1,27 @@
+<html>
+<head>
+</head>
+<body>
+<textarea id="k"></textarea>
+<button id="btn" onclick="fixd()">btn</button>
+<p id="hoho"></p>
+
+
+<script>
+
+var k=document.getElementById("k");
+for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+    dreamdate=localStorage.key( i ) ;
+  //if (dreamdate=="2017-08-07"){
+  k.value+=dreamdate
+  k.value+=localStorage.getItem(localStorage.key( i ));
+  }//}
+   
+function fixd(){
+  localStorage.setItem("2017-08-07",k.value);
+document.getElementById("hoho").innerText=JSON.parse(localStorage.getItem("2017-08-07"))[0]
+}
+
+</script>
+</body>
+</html>
