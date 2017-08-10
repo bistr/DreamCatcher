@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.phonegap.bugcatch"
+        id          = "com.phonegap.dreamcatch"
         versionCode = "1" 
         version     = "1.0.0" >
  
@@ -17,7 +17,7 @@
     <gap:plugin name="cordova-plugin-splashscreen" version="3.1.0" source="npm" />  
     <!-- versionCode is Android only -->
     <!-- version is in major.minor.patch format --> 
-    <name>BugCatch</name>
+    <name>DreamCatch</name>
  
     <description>
         It's a dream come true!
