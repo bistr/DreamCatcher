@@ -62,6 +62,7 @@ ul{
     var dreamdate="";
   var dreamcontent="";
   var dreamlist=document.getElementById("dreamlist");
+      var hidemode=localStorage.getItem("hidemode");
   for ( var i = 0, len = localStorage.length; i < len; ++i ) {
     dreamdate=localStorage.key( i ) ;
     for (var dreamid=0; dreamid<JSON.parse(localStorage.getItem(dreamdate)).length;dreamid++){
@@ -69,6 +70,31 @@ ul{
     dreamcontent=JSON.parse(localStorage.getItem(dreamdate))[dreamid] ;
     
 if (dreamdate.length==10 && dreamdate[4]==dreamdate[7] && dreamdate[7]=="-"){
+  //big edit 
+      if (hidemode=="true"){
+          var tekst=dreamcontent.split(" ");
+    for (var word=0; word<tekst.length;word++){
+      var duma=tekst[word];
+      if (duma[0].toUpperCase()==duma[0] && duma!="I"){
+      var dumareal=""
+      var index=0;
+        while (duma[index] && duma[index].toLowerCase()!=duma[index].toUpperCase()){
+          dumareal+=duma[index]
+          index+=1
+        }
+        if (JSON.parse(localStorage.getItem("namesofpeople")).indexOf(dumareal)!=-1){
+          dreamcontent=dreamcontent.replace(dumareal,"*")
+        }
+     }
+   } 
+  }
+  //end of edit
+  
+  
+  
+  
+  
+  
     var box=document.createElement("li");
     box.innerHTML="<span class='datichka'>"+dreamdate[8]+dreamdate[9]+"."+dreamdate[5]+dreamdate[6]+"."+dreamdate[0]+dreamdate[1] +dreamdate[2]+dreamdate[3]+ "</span><br> " +dreamcontent;
     dreamlist.insertBefore(box, dreamlist.childNodes[0]);

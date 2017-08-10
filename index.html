@@ -41,7 +41,7 @@ a{
   text-decoration:none;
   color:white;
   width:85vw;
-  font-size:2em;
+  font-size:1.5em;
   font-family:fontche;
   overflow: hidden;
   text-shadow:0px 0px 3px rgba(255,255,255,0.5);
@@ -59,7 +59,7 @@ a{
     
     img{
       height:40vh;
-      margin-bottom:10vh;
+      margin-bottom:5vh;
 
       
     }
@@ -75,6 +75,48 @@ a{
     <a href="dreamcatch.html">Add new dream</a>
     <a href="searchdreams.html">Search by date</a>
     <a href="dreamfeed.html">View dreams</a>
+    <a href="editnames.html">Edit names</a>
+        <a id="offswitch">Name hiding</a>
   </div>
+  <script>
+    
+    
+    var offswitch=document.getElementById("offswitch");
+    
+    if (!localStorage.getItem("hidemode")){
+      localStorage.setItem("hidemode","false");
+    }
+    
+    var hidemode=localStorage.getItem("hidemode");
+    
+    if (hidemode=="false"){
+      offswitch.innerHTML="Name hiding: OFF";
+    }
+    else{
+      offswitch.innerHTML="Name hiding: ON";
+    }
+    
+    offswitch.addEventListener("click",function(){
+    var hidemode=localStorage.getItem("hidemode");
+      if (hidemode=="false"){
+        hidemode=true;
+      }
+      else{
+        hidemode=false;
+      }
+    if (hidemode==false){
+      offswitch.innerHTML="Name hiding: OFF";
+    }
+    else{
+      offswitch.innerHTML="Name hiding: ON";
+    }
+      
+      localStorage.setItem("hidemode",hidemode);
+
+    
+    });
+    
+  </script>
+  
 </body>
 </html>
