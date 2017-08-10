@@ -4,7 +4,7 @@
         textarea{
             fontsize:1em;
             width:100vh;
-            height:50vh;
+            height:100vh;
         }
         
     </style>
@@ -20,9 +20,9 @@
 var k=document.getElementById("k");
 for ( var i = 0, len = localStorage.length; i < len; ++i ) {
     dreamdate=localStorage.key( i ) ;
-  if (dreamdate=="2017-07-31"){
+    k.value+=localStorage.key( i ) ;
   k.value+=localStorage.getItem(localStorage.key( i ));
-  }}
+  }
    
 function fixd(){
   localStorage.setItem("2017-07-31",k.value);
