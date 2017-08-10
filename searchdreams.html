@@ -99,6 +99,31 @@ function lookfordream() {
     for (var suncho=0;suncho<JSON.parse(localStorage.getItem(dreamdate)).length;suncho++){
     var golemo=document.getElementById("dream");
     var malko = document.createElement("li");
+      var hidemode=1;
+      var dreamcontent =JSON.parse(localStorage.getItem(dreamdate))[suncho];
+      //big edit
+
+    if (hidemode==1){
+          var tekst=dreamcontent.split(" ");
+    for (var word=0; word<tekst.length;word++){
+      var duma=tekst[word];
+      if (duma[0].toUpperCase()==duma[0] && duma!="I"){
+      var dumareal=""
+      var index=0;
+        while (duma[index] && duma[index].toLowerCase()!=duma[index].toUpperCase()){
+          dumareal+=duma[index]
+          index+=1
+        }
+        if (JSON.parse(localStorage.getItem("namesofpeople")).indexOf(dumareal)!=-1){
+          dreamcontent=dreamcontent.replace(dumareal,"*")
+        }
+     }
+   } 
+  }
+//end of edit
+      
+      
+      
     malko.innerHTML =
       "<span class='datichka'>" +
       dreamdate[8] +
@@ -112,7 +137,7 @@ function lookfordream() {
       dreamdate[2] +
       dreamdate[3] +
       "</span><br> " +
-      JSON.parse(localStorage.getItem(dreamdate))[suncho];
+      dreamcontent;
       golemo.insertBefore(malko,golemo.childNodes[0]);
   }
 }
