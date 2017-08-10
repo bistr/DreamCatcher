@@ -85,6 +85,53 @@ function catchdream(){
     localStorage.setItem(dreamdate,JSON.stringify(dreamarr));
     
     }
+    
+    //big edit 
+    
+    var tekst=dream.split(" ");
+    for (var word=0; word<tekst.length;word++){
+      var duma=tekst[word];
+      if (duma[0].toUpperCase()==duma[0] && duma!="I"){
+      var dumareal=""
+      var index=0;
+        while (duma[index] && duma[index].toLowerCase()!=duma[index].toUpperCase()){
+          dumareal+=duma[index]
+          index+=1
+        }
+        
+        if (localStorage.getItem("namesofpeople")) {
+          var namesarr=JSON.parse(localStorage.getItem("namesofpeople").slice());
+        }
+        else{
+        var namesarr=[]
+        }
+        
+         if (localStorage.getItem("notnames")) {
+          var notnamesarr=JSON.parse(localStorage.getItem("notnames").slice());
+        }
+        else{
+        var notnamesarr=[]
+        }
+        
+        if (notnamesarr.indexOf(dumareal)==-1 && namesarr.indexOf(dumareal)==-1){
+      
+        
+        
+        if (confirm("Is "+ dumareal+ " a name?")){
+        namesarr.push(dumareal);
+      
+        localStorage.setItem("namesofpeople",JSON.stringify(namesarr));
+        }
+          else{
+            notnamesarr.push(dumareal);
+            localStorage.setItem("notnames",JSON.stringify(notnamesarr));
+          }
+    
+    }}}
+  //end of big edit
+    
+    
+    
     document.getElementById("textarea").value="";
     setTimeout(function(){
   window.location="index.html";
