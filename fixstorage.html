@@ -20,10 +20,10 @@
 var k=document.getElementById("k");
 for ( var i = 0, len = localStorage.length; i < len; ++i ) {
     dreamdate=localStorage.key( i ) ;
-  if (dreamdate[0]=="2"){
+  //if (dreamdate[0]=="2"){
   k.value+="zzz"+dreamdate+"zzz";
   k.value+=localStorage.getItem(localStorage.key( i ));
-  }}
+  }//}
    
 function fixd(){
   var fulltext=k.value.split("zzz");
@@ -31,6 +31,8 @@ function fixd(){
     alert(fulltext[i]);
   localStorage.setItem(fulltext[i],fulltext[i+1]);
   }
+  alert(JSON.parse(localStorage.getItem("2017-08-01"))[1]);
+        }
 
 
 </script>
