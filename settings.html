@@ -1,0 +1,124 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no"/>
+  <style>
+    
+    @font-face {
+    font-family: fontche;
+    src: url(opensans.ttf);
+}
+    
+  .container{
+   background-color:#175489;
+    overflow: hidden;
+      height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  text-decoration:none;
+
+
+    }
+    body{
+      overflow: hidden;
+    position:absolute;
+      left:-8px;
+      top:-8px;
+      height:100%;
+      width:100%;
+      
+
+
+  
+}
+
+a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  text-decoration:none;
+  color:white;
+  width:85vw;
+  font-size:1em;
+  font-family:fontche;
+  overflow: hidden;
+  text-shadow:0px 0px 3px rgba(255,255,255,0.5);
+  background-color:#4E96D4;
+  margin-bottom:10px;
+  padding:10px 0;
+  border-radius:5px;
+ 
+  
+}
+    
+    a:active{
+      background-color:#4484BA;
+    }   
+    
+    img{
+      height:40vh;
+      margin-bottom:5vh;
+
+      
+    }
+
+
+
+  </style>
+  
+  </head>
+<body>
+  <div class="container">
+    <img src="icon.png"/>
+    <a id="offswitch">Name hiding</a>
+    <a href="editnames.html">Edit names</a>
+    <a href="fixstorage.html">Fix storage</a>
+  </div>
+  <script>
+    
+    
+    var offswitch=document.getElementById("offswitch");
+    
+    if (!localStorage.getItem("hidemode")){
+      localStorage.setItem("hidemode","false");
+    }
+    
+    var hidemode=localStorage.getItem("hidemode");
+    
+    if (hidemode=="false"){
+      offswitch.innerHTML="Name hiding: OFF";
+      offswitch.style.backgroundColor="#AD000C";
+    }
+    else{
+      offswitch.innerHTML="Name hiding: ON";
+      offswitch.style.backgroundColor="green";
+    }
+    
+    offswitch.addEventListener("click",function(){
+    var hidemode=localStorage.getItem("hidemode");
+      if (hidemode=="false"){
+        hidemode=true;
+      }
+      else{
+        hidemode=false;
+      }
+    if (hidemode==false){
+      offswitch.innerHTML="Name hiding: OFF";
+      offswitch.style.backgroundColor="#AD000C";
+    }
+    else{
+      offswitch.innerHTML="Name hiding: ON";
+      offswitch.style.backgroundColor="green";
+    }
+      
+      localStorage.setItem("hidemode",hidemode);
+
+    
+    });
+    
+  </script>
+  
+</body>
+</html>
