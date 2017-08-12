@@ -7,90 +7,209 @@
     src: url(opensans.ttf);
 }
       
-   body {
-     overflow:hidden;
-     position:relative;
+  header{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:5;
+  background-color:#4E96D4;
+    font-family: fontche;
+  
+}
+
+li {
+  list-style:none;
+  background-color:#00294D;
+  margin-bottom:10px;
+  margin-left:-30px;
+  text-indent:30px;
+  padding:20px 0 20px 0;
+  border-radius:5px;
+  box-shadow:0px 2px 4px rgba(44,62,80,0.65);
+  width:80vw;
+  font-size:1.5em;
+  color:white;
+  font-family: fontche;
+  
+}
+
+li button{
+  border:0px;
+  text-align:middle;
+  float:right;
+  position:relative;
+  width:40px;
+  height:40px;
+  margin-left:10px;
+  cursor:pointer;
+  background-color:transparent;
+  color:white;
+  font-size:1em;
+  }
+
+.buttons {
+ position:relative;
+ top:-35px;
+ left:-10px;
+}
+
+/*///////////////////////////////////////////////////////////////////////*/
+
+#done{
+  width: 100vw;
+  font-size:2em;
+  padding: 10px 0px;
+  background-color:#4E96D4;
+  color:white;
+  border:none;
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  font-family: fontche;
+  
+  }
+
+#done:active{
+  background-color:#326087;
+}
+
+body{
+  --backgroundcolor: #175489;
+  --fontcolor: white;
+  --accents: #4E96D4;
   background-color: #175489;
-  font-family:fontche;
-  height: 100%;
+  font-family:Arial;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
 
+
+
+ul{
+  margin-top:90px;
 }
-textarea {
-  width: 90vw;
-  height: 57vh;
-  resize: vertical;
+
+
+input{
+  background:white;
+  color:black;
+  float:left;
   font-size:1.5em;
-  border:none;
-  font-family: fontche;
-  word-wrap:break-word;
-  position:relative;
-  top:-40px;
-  
-  
+  padding:8px;
+  margin:10px;
+  width:85vw;
 }
-button {
-  width: 90vw;
-  margin-top: 10px;
+
+header button {
   font-size:2em;
-  padding: 10px 0px;
-  background-color:#4E96D4;
-    color:white;
-  border:none;
-  font-family: fontche;
+  padding: 0.5vw 1.5vw;
   border-radius:5px;
-  text-shadow:0px 0px 3px rgba(255,255,255,0.5);
-  position:relative;
-  top:-40px;
-
+  background-color:#175489;
+    color:white;
+  border:1px solid #195C96;
+  float:right;
+  margin:10px;
 }
-
-p{
-  color:white;
-  font-size:1.5em;
-  position:relative;
-  top:-20px;
-  text-align:center;
-}
-
 
     </style>
   </head>
   <body>
-    
-   <p id="instruction"> Separate names with a comma.</p>
-<textarea id="nameslist"></textarea>
-<button id="btn" onclick="done()">DONE</button>
+   <header>
+      <input type=text placeholder="Add name..." id="item">
+      <button id="add">+</button>
+    </header>
+   <ul class="todo" id="todo"></ul>    
+   <button  id="done" onclick="done()"> Done </button>
+
     
     <script>
-var namesarr=JSON.parse(localStorage.getItem("namesofpeople"));
-var notnamesarr=JSON.parse(localStorage.getItem("notnames"));
-
-document.getElementById("nameslist").value=namesarr;
+var remo = "<button> X </button>";
 
 
+document.getElementById("add").addEventListener("click", function(){
+  
+  var value = document.getElementById("item").value;
+  
+  if(value){
+    
+  addItemTodo(value);
+            document.getElementById("item").value="";
+  }
+    
+});
+
+var namesarr=JSON.parse(localStorage.getItem("namesofpeople"))
+var notnamesarr=JSON.parse(localStorage.getItem("notnames"))
+
+for (var id=0;id<namesarr.length;id++){
+  addItemTodo(namesarr[id])
+}
+
+
+
+function removeItem(){
+  var item = this.parentNode.parentNode;
+  var parent = item. parentNode;
+  parent.removeChild(item);
+}
+
+
+
+function addItemTodo(text){
+  
+  var list = document.getElementById("todo");
+  
+  var item = document.createElement("li");
+  item.innerText=text;
+  
+  
+  var remove = document.createElement("button");
+  remove.innerHTML=remo;
+  remove.addEventListener('click',removeItem);
+  
+  
+  var buttons = document.createElement("div");
+  buttons.classList.add("buttons");
+  
+  buttons.appendChild(remove);
+  item.appendChild(buttons);
+
+  list.insertBefore(item,list.childNodes[0]);
+  
+}
 
 function done(){
+
+var newnamesarrfull=document.getElementById("todo").innerText.split("X");
   
-  var newarr=document.getElementById("nameslist").value.split(",");
+
+
+var newnamesarr=[]
+
+for (var i=0;i<newnamesarrfull.length-1;i++){
+  var ime=newnamesarrfull[i]
+  ime=ime.slice(0,-1);
+  if (i!=0){
+    ime=ime.substr(1);
+  }
+  newnamesarr.push(ime);
+}
+
+localStorage.setItem("namesofpeople",JSON.stringify(newnamesarr));
   
-  localStorage.setItem("namesofpeople",JSON.stringify(newarr)); //sanitize this - has a lot of opportunity for bugs
- 
-  for (var name in newarr){
-    if (notnamesarr.indexOf(newarr[name])!=-1){
+  for (var name in newnamesarr){
+    if (notnamesarr.indexOf(newnamesarr[name])!=-1){
      
-      notnamesarr.splice(notnamesarr.indexOf(newarr[name]),1);
+      notnamesarr.splice(notnamesarr.indexOf(newnamesarr[name]),1);
       }
      
     }
    localStorage.setItem("notnames",JSON.stringify(notnamesarr));
 
-   
-    
-    document.getElementById("nameslist").value="";
+
     setTimeout(function(){
   window.location="index.html";
     },800);
