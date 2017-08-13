@@ -73,7 +73,7 @@ function catchdream(){
   var dream = document.getElementById("textarea").value
   var dreamdate = document.getElementById("date").value.toString()
   if (dream){
-    if (dream[dream.length-1])==" "){
+    if (dream[dream.length-1]==" "){
       dream=dream.slice(0, -1);
     }
     if (localStorage.getItem(dreamdate)){
