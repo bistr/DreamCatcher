@@ -47,6 +47,19 @@ li{
 ul{
   margin-left:-35px;
 }
+      
+button{
+  border:none;
+  color:white;
+  background-color:#1E3B54;
+  font-size:1.5em;
+  border-radius:50px;
+  height:30px;
+  width:30px;
+  padding:0 0 6px 0;
+
+}      
+      
     </style>
   </head>
   <body>
@@ -55,6 +68,28 @@ ul{
 
     
     <script>
+      
+      
+     function delk(){
+    if (window.confirm("Are you sure you want to delete this dream?")){
+    var dateinquestion=this.parentNode.innerText.split(this.parentNode.innerText[10])[0];
+    var dateinq=dateinquestion[6]+dateinquestion[7]+dateinquestion[8]+dateinquestion[9]+"-"+dateinquestion[3]+dateinquestion[4]+"-"+dateinquestion[0]+dateinquestion[1];
+    var arrinquestion=JSON.parse(localStorage.getItem(dateinq));
+    var indexinq=arrinquestion.indexOf(this.parentNode.innerText.split(this.parentNode.innerText[10])[1].slice(0, -1))
+
+    arrinquestion.splice(indexinq,1);
+if (arrinquestion.length==0){
+  localStorage.removeItem(dateinq);
+}
+    else{
+    localStorage.setItem(dateinq,JSON.stringify(arrinquestion))
+    }
+ //alert(this.parentNode.innerText.split(this.parentNode.innerText[10]),)
+     
+    //alert(n)
+    this.parentNode.parentNode.removeChild(this.parentNode);
+    }
+  }   
 
 
   document.getElementById("dreamlist").style.display = "block";
@@ -62,6 +97,7 @@ ul{
     var dreamdate="";
   var dreamcontent="";
   var dreamlist=document.getElementById("dreamlist");
+      var butt="<button id='hey'>x</button>"
       var hidemode=localStorage.getItem("hidemode");
   for ( var i = 0, len = localStorage.length; i < len; ++i ) {
     dreamdate=localStorage.key( i ) ;
@@ -97,7 +133,11 @@ if (dreamdate.length==10 && dreamdate[4]==dreamdate[7] && dreamdate[7]=="-"){
   
     var box=document.createElement("li");
     box.innerHTML="<span class='datichka'>"+dreamdate[8]+dreamdate[9]+"."+dreamdate[5]+dreamdate[6]+"."+dreamdate[0]+dreamdate[1] +dreamdate[2]+dreamdate[3]+ "</span><br> " +dreamcontent;
-    dreamlist.insertBefore(box, dreamlist.childNodes[0]);
+    var t=document.createElement("div");
+  t.innerHTML=butt;
+  t.addEventListener("click",delk);
+box.appendChild(t);
+  dreamlist.insertBefore(box, dreamlist.childNodes[0]);
   }}} 
     </script>
   </body>
