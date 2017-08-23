@@ -85,15 +85,15 @@ left:0;
 
 
 textarea {
-  width:90%;
-  height: 67vh;
+  width:95%;
+  height: 75%;
   resize: vertical;
   font-size:1.5em;
   border:none;
   font-family: fontche;
 }
 #catchbutton {
-  width:90%;
+  width:95%;
   margin-top: 10px;
 font-size:2em;
   padding: 10px 0px;
@@ -109,7 +109,7 @@ input{
    background-color:#4E96D4;
     color:white;
   margin:10px;
-  width:90%;
+  width:95%;
   font-family: fontche;
 }
 
@@ -119,15 +119,14 @@ input{
   align-items: center;
   flex-direction: column;
   background-color: rgba(0,0,0,0.8);
-  padding:25px 10px;
+  padding:10px;
   border-radius:10px;
   position:fixed;
   z-index:5;
-  margin:1.9vw;
-  left:5vw;
-  right:5vw;
-  top:5vh;
-  bottom:5vh;
+  left:1vw;
+  right:1vw;
+  top:1vh;
+  bottom:1vh;
 }
     </style>
   </head>
@@ -188,7 +187,8 @@ while (
           index += 1;
         }
             if (namesofpeople.indexOf(dumareal) != -1) {
-              dreamcontent = dreamcontent.replace(dumareal, "*");
+              var newstr="*".repeat(dumareal.length)
+              dreamcontent = dreamcontent.replace(dumareal, newstr);
             }
           }
         }
