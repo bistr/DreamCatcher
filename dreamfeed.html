@@ -6,9 +6,8 @@
     font-family: fontche;
     src: url(opensans.ttf);
 }
-      
 
-body {
+      body {
   background-color: #175489;
   font-family: fontche;
   display: flex;
@@ -17,7 +16,9 @@ body {
   flex-direction:column;
 }
 
-
+#dream{
+  visibility:hidden; 
+}
 .datichka{
   float:right;
   display:block;
@@ -44,61 +45,345 @@ li{
   border-radius:5px;
   box-shadow:2px 2px 5px rgba(0,0,0,0.5);
 }
+
 ul{
   margin-left:-35px;
+}
+
+
+
+#hey,#hey2{
+  border:none;
+  color:white;
+  background-color:#1E3B54;
+  font-size:1.5em;
+  border-radius:50px;
+  height:30px;
+  width:40px;
+  padding:0 0 6px 0;
+  margin:1vw 0.5vw 0 0.5vw;
+  position:relative;
+
+
+}
+
+.tuili{
+  display:flex;
+  flex-direction:row;
+  
+  
+}
+
+#hey2{
+left:0;
+}
+
+
+#hey{
+  left:63vw;
+}
+
+
+textarea {
+  width:95%;
+  height: 75%;
+  resize: vertical;
+  font-size:1.5em;
+  border:none;
+  font-family: fontche;
+}
+#catchbutton {
+  width:95%;
+  margin-top: 10px;
+font-size:2em;
+  padding: 10px 0px;
+  background-color:#4E96D4;
+    color:white;
+  border:none;
+  font-family: fontche;
+  border-radius:5px;
+  text-shadow:0px 0px 3px rgba(255,255,255,0.5);
+}
+input{
+  font-size:2em;
+   background-color:#4E96D4;
+    color:white;
+  margin:10px;
+  width:95%;
+  font-family: fontche;
+}
+
+#editwindow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(0,0,0,0.8);
+  padding:10px;
+  border-radius:10px;
+  position:fixed;
+  z-index:5;
+  left:1vw;
+  right:1vw;
+  top:1vh;
+  bottom:1vh;
 }
     </style>
   </head>
   <body>
 
+    
+    <div id="editwindow">
+    <input type="date" id="date"></input>
+
+<textarea id="textarea" placeholder="I dreamt that..."></textarea>
+  <button id="catchbutton" onclick="catchdream()"> Catch dream </button>
+    </div>
   <ul id="dreamlist"></ul>
 
     
     <script>
+   
+var dreamdate = "";
+var dreamcontent = "";
+var dreamlist = document.getElementById("dreamlist");
+var hidemode = localStorage.getItem("hidemode");
+var butt = "<button id='hey'>x</button>";
+var buttedit = "<button id='hey2'>&#9998;</button>";
+var namesofpeople = JSON.parse(localStorage.getItem("namesofpeople"));
+var indexinq = "";
+var dateinq = "";
 
+document.getElementById("editwindow").style.display = "none";
+for (var i = 0, len = localStorage.length; i < len; ++i) {
+  dreamdate = localStorage.key(i);
+  for (
+    var dreamid = 0;
+    dreamid < JSON.parse(localStorage.getItem(dreamdate)).length;
+    dreamid++
+  ) {
+    dreamcontent = JSON.parse(localStorage.getItem(dreamdate))[dreamid];
 
-  document.getElementById("dreamlist").style.display = "block";
-  document.getElementById("dreamlist").innerHTML = "";
-    var dreamdate="";
-  var dreamcontent="";
-  var dreamlist=document.getElementById("dreamlist");
-      var hidemode=localStorage.getItem("hidemode");
-  for ( var i = 0, len = localStorage.length; i < len; ++i ) {
-    dreamdate=localStorage.key( i ) ;
-    for (var dreamid=0; dreamid<JSON.parse(localStorage.getItem(dreamdate)).length;dreamid++){
-    
-    dreamcontent=JSON.parse(localStorage.getItem(dreamdate))[dreamid] ;
-    
-if (dreamdate.length==10 && dreamdate[4]==dreamdate[7] && dreamdate[7]=="-"){
-  //big edit 
-      if (hidemode=="true"){
-          var tekst=dreamcontent.split(" ");
-    for (var word=0; word<tekst.length;word++){
-      var duma=tekst[word];
-      if (duma[0].toUpperCase()==duma[0] && duma!="I"){
-      var dumareal=""
-      var index=0;
-        while (duma[index] && duma[index].toLowerCase()!=duma[index].toUpperCase()){
-          dumareal+=duma[index]
-          index+=1
+    if (
+      dreamdate.length == 10 &&
+      dreamdate[4] == dreamdate[7] &&
+      dreamdate[7] == "-"
+    ) {
+      //big edit
+      if (hidemode == "true") {
+        var tekst = dreamcontent.split(" ");
+
+        for (var word = 0; word < tekst.length; word++) {
+          var duma = tekst[word];
+
+          if (duma[0].toUpperCase() == duma[0] && duma != "I") {
+            var dumareal = "";
+            var index = 0;
+while (
+          duma[index] &&
+          duma[index].toLowerCase() != duma[index].toUpperCase()
+        ) {
+          dumareal += duma[index];
+          index += 1;
         }
-        if (JSON.parse(localStorage.getItem("namesofpeople")).indexOf(dumareal)!=-1){
-          dreamcontent=dreamcontent.replace(dumareal,"*")
+            if (namesofpeople.indexOf(dumareal) != -1) {
+              var newstr="*".repeat(dumareal.length)
+              dreamcontent = dreamcontent.replace(dumareal, newstr);
+            }
+          }
         }
-     }
-   } 
+      }
+      //end of edit
+      
+      
+
+      var box = document.createElement("li");
+      box.innerHTML =
+        "<span class='datichka'>" +
+        dreamdate[8] +
+        dreamdate[9] +
+        "." +
+        dreamdate[5] +
+        dreamdate[6] +
+        "." +
+        dreamdate[0] +
+        dreamdate[1] +
+        dreamdate[2] +
+        dreamdate[3] +
+        "</span><br> " +
+        dreamcontent;
+      var t = document.createElement("div");
+      var p = document.createElement("div");
+      var tp = document.createElement("div");
+      t.innerHTML = butt;
+      p.innerHTML = buttedit;
+      t.addEventListener("click", delk);
+      p.addEventListener("click", editk);
+      tp.appendChild(p);
+      tp.appendChild(t);
+      tp.classList.add("tuili");
+      if(hidemode!="true"){
+      box.appendChild(tp);
+      };
+      dreamlist.insertBefore(box, dreamlist.childNodes[0]);
+    }
   }
-  //end of edit
-  
-  
-  
-  
-  
-  
-    var box=document.createElement("li");
-    box.innerHTML="<span class='datichka'>"+dreamdate[8]+dreamdate[9]+"."+dreamdate[5]+dreamdate[6]+"."+dreamdate[0]+dreamdate[1] +dreamdate[2]+dreamdate[3]+ "</span><br> " +dreamcontent;
-    dreamlist.insertBefore(box, dreamlist.childNodes[0]);
-  }}} 
+}
+
+function editk() {
+  var thing = this.parentNode.parentNode;
+  var dateinquestion = this.parentNode.parentNode.innerText.split(
+    this.parentNode.parentNode.innerText[10]
+  )[0];
+  dateinq =
+    dateinquestion[6] +
+    dateinquestion[7] +
+    dateinquestion[8] +
+    dateinquestion[9] +
+    "-" +
+    dateinquestion[3] +
+    dateinquestion[4] +
+    "-" +
+    dateinquestion[0] +
+    dateinquestion[1];
+  var dreaminq = this.parentNode.parentNode.innerText.split(
+    this.parentNode.parentNode.innerText[10]
+  )[1];
+
+  var arrinquestion = JSON.parse(localStorage.getItem(dateinq));
+
+  indexinq = arrinquestion.indexOf(dreaminq);
+
+  document.getElementById("editwindow").style.display = "flex";
+  document.getElementById("textarea").value = dreaminq;
+  document.getElementById("date").value = dateinq;
+}
+
+function catchdream() {
+  var dream = document.getElementById("textarea").value;
+  var dreamdate = document.getElementById("date").value.toString();
+  if (dream) {
+    if (dream[dream.length - 1] == " ") {
+      dream = dream.slice(0, -1);
+    }
+
+    if (dreamdate == dateinq) {
+      var dreamarr = JSON.parse(localStorage.getItem(dreamdate));
+      dreamarr[indexinq] = dream;
+      localStorage.setItem(dreamdate, JSON.stringify(dreamarr));
+    } else {
+      var oldarr = JSON.parse(localStorage.getItem(dateinq));
+      oldarr.splice(indexinq, 1);
+      if (oldarr.length > 0) {
+        localStorage.setItem(dateinq, JSON.stringify(oldarr));
+      } else {
+        localStorage.removeItem(dateinq);
+      }
+      if (localStorage.getItem(dreamdate)) {
+        var dreamarr = JSON.parse(localStorage.getItem(dreamdate));
+        dreamarr.push(dream);
+        localStorage.setItem(dreamdate, JSON.stringify(dreamarr));
+      } else {
+        var dreamarr = [];
+        dreamarr.push(dream);
+
+        localStorage.setItem(dreamdate, JSON.stringify(dreamarr));
+      }
+    }
+
+    //big edit
+
+    var tekst = dream.split(" ");
+    for (var word = 0; word < tekst.length; word++) {
+      var duma = tekst[word];
+      if (duma[0].toUpperCase() == duma[0] && duma != "I") {
+        var dumareal = "";
+        var index = 0;
+        while (
+          duma[index] &&
+          duma[index].toLowerCase() != duma[index].toUpperCase()
+        ) {
+          dumareal += duma[index];
+          index += 1;
+        }
+
+        if (localStorage.getItem("namesofpeople")) {
+          var namesarr = JSON.parse(
+            localStorage.getItem("namesofpeople").slice()
+          );
+        } else {
+          var namesarr = [];
+        }
+
+        if (localStorage.getItem("notnames")) {
+          var notnamesarr = JSON.parse(
+            localStorage.getItem("notnames").slice()
+          );
+        } else {
+          var notnamesarr = [];
+        }
+
+        if (
+          notnamesarr.indexOf(dumareal) == -1 &&
+          namesarr.indexOf(dumareal) == -1
+        ) {
+          if (confirm("Is " + dumareal + " a name?")) {
+            namesarr.push(dumareal);
+
+            localStorage.setItem("namesofpeople", JSON.stringify(namesarr));
+          } else {
+            notnamesarr.push(dumareal);
+            localStorage.setItem("notnames", JSON.stringify(notnamesarr));
+          }
+        }
+      }
+    }
+
+    location.reload(true);
+  }
+}
+
+function delk() {
+        if (window.confirm("Are you sure you want to delete this dream?")) {
+          var dateinquestion = this.parentNode.parentNode.innerText.split(
+            this.parentNode.parentNode.innerText[10]
+          )[0];
+          dateinq =
+            dateinquestion[6] +
+            dateinquestion[7] +
+            dateinquestion[8] +
+            dateinquestion[9] +
+            "-" +
+            dateinquestion[3] +
+            dateinquestion[4] +
+            "-" +
+            dateinquestion[0] +
+            dateinquestion[1];
+
+          var arrinquestion = JSON.parse(localStorage.getItem(dateinq));
+
+          indexinq = arrinquestion.indexOf(
+            this.parentNode.parentNode.innerText.split(
+              this.parentNode.parentNode.innerText[10]
+            )[1]
+          );
+
+          arrinquestion.splice(indexinq, 1);
+          if (arrinquestion.length == 0) {
+            localStorage.removeItem(dateinq);
+          } else {
+            localStorage.setItem(dateinq, JSON.stringify(arrinquestion));
+          }
+          //alert(this.parentNode.innerText.split(this.parentNode.innerText[10]),)
+
+          //alert(n)
+          this.parentNode.parentNode.parentNode.removeChild(
+            this.parentNode.parentNode
+          );
+        }
+      }
+
+ 
     </script>
   </body>
 </html>
