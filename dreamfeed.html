@@ -180,8 +180,13 @@ for (var i = 0, len = localStorage.length; i < len; ++i) {
           if (duma[0].toUpperCase() == duma[0] && duma != "I") {
             var dumareal = "";
             var index = 0;
-
-            dumareal = duma;
+while (
+          duma[index] &&
+          duma[index].toLowerCase() != duma[index].toUpperCase()
+        ) {
+          dumareal += duma[index];
+          index += 1;
+        }
             if (namesofpeople.indexOf(dumareal) != -1) {
               dreamcontent = dreamcontent.replace(dumareal, "*");
             }
@@ -217,8 +222,9 @@ for (var i = 0, len = localStorage.length; i < len; ++i) {
       tp.appendChild(p);
       tp.appendChild(t);
       tp.classList.add("tuili");
-
+      if(hidemode!="true"){
       box.appendChild(tp);
+      };
       dreamlist.insertBefore(box, dreamlist.childNodes[0]);
     }
   }
